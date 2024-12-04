@@ -1,0 +1,54 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color:darkorange;
+    height: 100px;
+    width: 100%;
+    border-bottom: 5px solid chocolate;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.Logo{
+    padding-left: 20px;
+}
+.Logo img{
+    width: 80px;
+    height: 80px;
+
+    
+}
+.Navigimi {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.Menus ul{
+    width: 500px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    padding-top: 50px;
+    
+}
+.BigBut {
+    display: flex;
+    width: 200px;
+    padding-top: 30px;
+}
+.BigBut button{
+    width: 85px;
+    height: 35px;
+    position: relative;
+    border-radius: 15px;
+    border: 1px solid brown;
+    color: black;
+    background-color: chocolate;
+    
+}

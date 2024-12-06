@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    /* width: 100%;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: darkorange; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: darkorange;
+}
+
+.Logini {
+    background-color: rgb(221, 206, 178);
+    padding: 50px 50px;
+    border-radius: 10px;
+    color: aliceblue;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.Logini .Hyrja {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: rgb(221, 206, 178);
+}
+.Hyrja li {
+   
+    position: relative;
+    background: wheat;
+    margin: 13px 0;
+}
+
+
+.Hyrja input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 2);
+    outline: none;
+    font-size: 16px;
+    color:black ;
+    border-radius: 6px;
+    padding: 15px 15px 15px 40px ;
+}
+
+.Hyrja i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+.But {
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+ .But button {
+
+   width: 100%;
+   height: 45px;
+   background-color: white;
+   border: none;
+   outline: none;
+   border-radius: 15px;
+   box-shadow: 0 0 10px black;
+   cursor: pointer;
+   font-size: 16px;
+   color: black;
+   font-weight: 600;
+}
+
+.But a {
+    text-decoration: none;
+    display: inline-block;
+    font-size:  14.5px;
+    margin: 10px 0 23px;
+    color: aliceblue;
+
+}

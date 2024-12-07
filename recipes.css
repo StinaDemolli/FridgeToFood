@@ -56,3 +56,64 @@
     line-height: 1.5;
 }
 
+
+/*mini-nav*/
+
+.MiniNav {
+    background-color:darkorange;
+    padding: 10px 20px;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    margin: 20px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.MiniNav {
+    background-color: darkorange;
+    padding: 10px 0;
+    margin: 0;  
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+
+.MiniNav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.MiniNav li {
+    margin: 0 20px; 
+}
+
+.MiniNav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 8px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.MiniNav a:hover {
+    background-color: white;
+    color: black; 
+}
+
+.Header, .footer, .Recetat {
+    margin: 0;
+    padding: 0;
+}

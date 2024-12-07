@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Log in</title>
+    <link rel="stylesheet" href="Login.css"><link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+
+    <script>
+        document.addEventListener("DOMContentLoaded",function(){
+            document.getElementById("Login").addEventListener("submit",function(ngjarja){
+                const user=document.getElementById('Username');
+                const pass=document.getElementById('Password');
+
+                if(user.value === "" || user.value == null){
+                    alert("Please write your Username");
+                    user.focus();
+                    return false;
+                }
+                if(pass.value === "" || pass.value == null){
+                    alert("Please write your Password");
+                    pass.focus();
+                    return false;
+                }
+
+
+            });
+        });
+
+    </script>
+
+</head>
+<body>
+    
+    <div class="Logini">
+        <h1>Log in</h1>
+    <ul type="none">
+
+        <li>Please enter your information:</li>
+
+        <div class="Hyrja">
+        <li> <input type="text" id="Username" placeholder="Username" required> 
+        <i class='bx bx-user' ></i></li>
+        <li> <input type="password" id="Password" name="" placeholder="Password" required>
+        <i class='bx bx-lock-alt' ></i> </li>
+        </div>
+    </ul> 
+
+    <form id="Login">
+        <div class="But">
+          <button type="submit">Log in</button>
+      </form>
+        <h3><a href="#">Or Sign up</a></h3>
+
+    </div>
+    </div>
+</body>
+</html>

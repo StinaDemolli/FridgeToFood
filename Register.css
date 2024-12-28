@@ -54,7 +54,7 @@ body{
     padding: 15px 15px 15px 40px ;
 }
 
-.input-box .input-field input :: :placeholder{
+.input-box .input-field input ::placeholder{
     color: aliceblue;
 }
 

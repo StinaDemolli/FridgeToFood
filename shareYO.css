@@ -20,11 +20,12 @@
     margin: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-image: url(Images/12.jpg);
 }
 
 .ShareYourOwn h1 {
     text-align: center;
-    color: #333;
+    color:whitesmoke;
     margin-bottom: 20px;
 }
 
@@ -37,7 +38,7 @@
     display: block;
     font-size: 16px;
     text-align: left;
-     color: #333;
+     color: whitesmoke;
     margin-bottom: 10px;
 }
 
@@ -54,7 +55,7 @@
 
 .share input:focus,
 .share textarea:focus {
-    border-color: darkorange;
+    border-color: #ccc;
     outline: none;
 }
 
@@ -68,7 +69,6 @@
 
 .form-group .custom-file-upload {
     display: inline-block;
-    background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -82,7 +82,7 @@
     padding: 14px;
     font-size: 18px;
     color: white;
-    background-color: darkorange;
+    background-color:#bcb3a0;
     border: none;
     border-radius: 6px;
     cursor: pointer;

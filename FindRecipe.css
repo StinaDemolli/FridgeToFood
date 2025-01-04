@@ -1,5 +1,10 @@
+*{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 .Gjeje {
     margin: 20px 0px 40px 0px; 
+    background-image:url(Images/11.jpg);
+    color: whitesmoke;
 }
 .GjejeInfo{
     width: 500px;
@@ -12,7 +17,7 @@
 }
 
 .Perberes {
-    background-color: darkorange;
+    background-color: whitesmoke;
     /* display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -40,36 +45,62 @@
 .Seleksione h3 {
     text-align: left;
     padding-bottom: 20px;
+    font-size: 20px;
+    color: #333;
 }
 
 .Seleksione {
     margin: 20px;
-    border: 2px solid chocolate;
+    border: 2px solid #bcb3a0;
+    border-radius: 8px;
     padding: 30px 30px;
     width: 250px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    background-color: #fafafa; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-li {
+.Seleksione li {
+    font-size: 16px;
+    padding: 6px 0;
     display: flex;
     align-items: center; 
+    color: #555;
     gap: 5px;
 }
 
+.Seleksione li:hover {
+    background-color: #E1DACA; 
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 input[type="checkbox"] {
-    margin: 0;
+    width: 18px;
+    height: 18px;
+    margin-right: 10px; 
+    accent-color: #bcb3a0; 
+    cursor: pointer;
 }
 
 .FindBut {
-    background-color: brown;
-    border: 2px solid chocolate;
-    border-radius: 10px;
-    padding: 10px 10px;
-    width: 200px;
-    height: 40px;
+    background-color: #fafafa;
+    border: 2px solid #E1DACA;
+    border-radius: 6px;
+    padding: 10px;
+    width: 100%;
+    color: #333;
+    font-size: 18px;
+    font-weight: bolder;
 }
+
+.FindBut:hover {
+    background-color: #6f6e6e;
+    color: white;
+}
+
 .FRBut {
     display: flex;
     justify-content: center;

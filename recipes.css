@@ -120,3 +120,67 @@ body {
     padding: 0;
 }
 
+/* pjesa e sliderit*/
+
+.swiper {
+    width: 100%;
+    padding: 2rem 0;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sektoriS-slide-img {
+    width: 18rem; 
+    height: 18rem; 
+    border-radius: 2rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.sektoriS-slide-img img {
+    width: auto; 
+    height: 100%; 
+    object-fit: contain; 
+    display: block; 
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    background: none; 
+    color: white; 
+    border: none;
+    outline: none; 
+    font-size: 2rem; 
+    cursor: pointer;
+    transition: color white ease; 
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    color:white; 
+}
+
+.swiper-button-next:focus,
+.swiper-button-prev:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.swiper-button-next:active,
+.swiper-button-prev:active {
+    background: none;
+    color: white;
+    box-shadow: none; 
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 2rem;
+    color: inherit; 
+}

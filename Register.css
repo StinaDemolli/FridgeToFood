@@ -5,17 +5,17 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-body{
+.trupp{
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: orange;
+
 }
 
 .wrapper{
     width: 750px;
-    background-color: rgb(221, 206, 178);
+    background-color:rgb(111, 108, 103);
     border-radius: 10px;
     color: aliceblue;
     padding: 40px 35px 55px ;
@@ -31,14 +31,14 @@ body{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    background-color: rgb(221, 206, 178);
+    background-color:rgb(111, 108, 103);
 }
 
 .input-box .input-field{
     position: relative;
     width: 48%;
     height: 50px;
-    background: wheat;
+    background:  #bcb3a0;
     margin: 13px 0;
 }
 

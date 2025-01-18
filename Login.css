@@ -4,23 +4,19 @@
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
-body {
-    /* width: 100%;
-    height: 800px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    background-color: darkorange; */
+
+.trupi {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-color: darkorange;
+    
+    height: 700px;
+    width: 100%;
 }
 .Logini {
-    background-color: rgb(221, 206, 178);
+    background-color: rgb(111, 108, 103);
+    width: 500px;
+    height: 400px;
     padding: 50px 50px;
     border-radius: 10px;
     color: aliceblue;
@@ -33,12 +29,12 @@ body {
     flex-direction: column;
     justify-content: space-between;
     flex-wrap: wrap;
-    background-color: rgb(221, 206, 178);
+    background-color: rgb(111, 108, 103);
 }
 .Hyrja li {
    
     position: relative;
-    background: wheat;
+    background: #bcb3a0;
     margin: 13px 0;
 }
 .Hyrja input {
@@ -77,9 +73,10 @@ body {
    font-weight: 600;
 }
 .But a {
+    padding-top: 8px;
     text-decoration: none;
     display: inline-block;
-    font-size:  14.5px;
+    font-size: medium;
     margin: 10px 0 23px;
     color: aliceblue;
 }

@@ -48,6 +48,47 @@
                         <li><a href="shareYO.html">Share Your Own</a></li>
                     </ul>
                 </nav>
+<br>
+                 <!--pjesa e shtuar qe perfshihet ne slider-->
+        <section id="sektoriS"> 
+            <div class="kontinieri">
+                <div class="swiper sektoriS-slider">
+                    <div class="swiper-wrapper">
+                      
+                        <div class="swiper-slide">
+                            <div class="sektoriS-slide-img">
+                                <img src="Images/sallata1.png" alt="sallata 1">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="sektoriS-slide-img">
+                                <img src="Images/sallata2.png" alt="sallata 2">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="sektoriS-slide-img">
+                                <img src="Images/sallata3.png" alt="sallata 3">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="sektoriS-slide-img">
+                                <img src="Images/sallata4.png" alt="sallata 4">
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="sektoriS-slide-img">
+                                <img src="Images/sallata5.png" alt="sallata 5">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pagination and Navigation -->
+                    <div class="swiper-p"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </section>
+        <br>
 
 
           <h1>Our Favorite Recipes</h1>
@@ -142,5 +183,33 @@
                 </div>
             </div>
         </footer>
+
+<!-- slideri me js -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<script>
+    const sektoriSlider = new Swiper('.sektoriS-slider', {
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        loop: true,
+        slidesPerView: 'auto',
+        spaceBetween: 20,
+        coverflowEffect: {
+            rotate: 0,
+            stretch: 0,
+            depth: 100,
+            modifier: 1.5,
+        },
+        pagination: {
+            el: '.swiper-p',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
+
     </body>
 </html>

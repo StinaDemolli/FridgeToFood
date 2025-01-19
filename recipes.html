@@ -4,7 +4,6 @@
         <title>FridgeToFood</title>
         <link rel="stylesheet" href="recipes.css"> <link rel="stylesheet" href="">
         <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
         <link rel="stylesheet" href="FtoF.css">
     </head>
 
@@ -38,11 +37,9 @@
 
             </header>
         </div>
-        <hr>
+    
 
         <section class="Recetat">
-
-            <div class="navbar">
 
             <div class="navbar">
                 <nav class="MiniNav">
@@ -54,48 +51,45 @@
                 </nav>
             </div>
 <br>
-                 <!--pjesa e shtuar qe perfshihet ne slider-->
-        <section id="sektoriS"> 
-            <div class="kontinieri">
-                <div class="swiper sektoriS-slider">
-                    <div class="swiper-wrapper">
-                      
+                <div class="sliderii">
+                    <div class="slidestot">
+
+                        <div class="arrow">
+                      <button class="prev" onclick="prev()" >&#10094;</button></div>
+
                         <div class="swiper-slide">
-                            <div class="sektoriS-slide-img">
+                            <div class="sliimg">
                                 <img src="Images/sallata1.png" alt="sallata 1">
                             </div>
                         </div>
                         <div class="swiper-slide">
-                            <div class="sektoriS-slide-img">
+                            <div class="sliimg">
                                 <img src="Images/sallata2.png" alt="sallata 2">
                             </div>
                         </div>
                         <div class="swiper-slide">
-                            <div class="sektoriS-slide-img">
+                            <div class="sliimg">
                                 <img src="Images/sallata3.png" alt="sallata 3">
                             </div>
                         </div>
                         <div class="swiper-slide">
-                            <div class="sektoriS-slide-img">
+                            <div class="sliimg">
                                 <img src="Images/sallata4.png" alt="sallata 4">
                             </div>
                         </div>
                         <div class="swiper-slide">
-                            <div class="sektoriS-slide-img">
+                            <div class="sliimg">
                                 <img src="Images/sallata5.png" alt="sallata 5">
                             </div>
                         </div>
-                    </div>
-                    <!-- Pagination and Navigation -->
-                    <div class="swiper-p"></div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
+                    
+
+                    <div class="arrow">
+                    <button class="next" onclick="next()" >&#10095;</button></div>
                 </div>
-            </div>
-        </section>
+                </div>
         <br>
 
-            </div>
 
           <h1>Our Favorite Recipes</h1>
                 <div class="RecetatContainer">
@@ -196,31 +190,43 @@
 
         </footer>
 
-<!-- slideri me js -->
-<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <script>
-    const sektoriSlider = new Swiper('.sektoriS-slider', {
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        loop: true,
-        slidesPerView: 'auto',
-        spaceBetween: 20,
-        coverflowEffect: {
-            rotate: 0,
-            stretch: 0,
-            depth: 100,
-            modifier: 1.5,
-        },
-        pagination: {
-            el: '.swiper-p',
-            clickable: true,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
+
+        const slide = document.querySelectorAll(".sliimg img");
+        let slidepoz = 0;
+        let intervalId= null;
+        
+        
+        intitializeSlide();
+ 
+        function intitializeSlide(){
+
+            slide[slidepoz].classList.add("Shfaqe");
+            intervalId = setInterval(next, 4000)
+        }
+
+        function showSlide(index){
+
+            if(index >= slide.length){
+                slidepoz=0;
+            }
+            else if(index < 0){
+                slidepoz = slide.length -1;
+            }
+
+            slide.forEach(slide => {
+                slide.classList.remove("Shfaqe");
+            });
+            slide[slidepoz].classList.add("Shfaqe");
+        }
+
+        function prev(){
+            showSlide(--slidepoz);
+        }
+
+        function next(){
+            showSlide(++slidepoz);
+        }
 </script>
 
     </body>

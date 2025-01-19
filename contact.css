@@ -24,7 +24,7 @@
 .kontakti .kontenti h2 {
     font-size: 36px;
     font-weight: 600;
-    color:#bcb3a0;
+    color: #1a1a1a;
     margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -65,10 +65,6 @@
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.container .infot .kuti:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
 
 .container .infot .kuti .ikona {
     min-width: 60px;
@@ -114,10 +110,6 @@
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.mesazhi:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
 
 .mesazhi .field {
     display: flex;
@@ -156,6 +148,4 @@
     transition: background-color 0.3s;
 }
 
-.mesazhi .btn:hover {
-    background-color: #a09887;
-}
+

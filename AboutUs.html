@@ -93,19 +93,19 @@ Join us as we explore new flavors, master timeless techniques, and celebrate the
 
         <div class="KushJemi">
             <h2>Meet our Team</h2>
-
+ <br>
             <div class="Ekipa">
 
                 <div class="Lojtari">
 
                     <div class="Imag">
-                <img src="Images/logoFf.png" alt="foto1">
+                <img src="Images/icon.jpg" alt="foto1">
                     </div>
                     
                     <div class="Prshkk">
                 <h3>Stina Demolli</h3>
                 <br>
-                <p>Stina was born in Prishtina. She always wanted to explore different countries and emerge in different cultures.</p>
+                <p>Stina was born in Prishtina, where she was used to eating fast food throughout her childhood. However, her passion for discovering healthier food options grew, and she became eager to explore diverse cuisines.</p>
                 </div>
                 </div>
 
@@ -113,7 +113,7 @@ Join us as we explore new flavors, master timeless techniques, and celebrate the
 
 
                     <div class="Imag">
-                <img src="Images/logoFf.png" alt="foto2">
+                <img src="Images/icon.jpg" alt="foto2">
                     </div>
 
 
@@ -170,5 +170,42 @@ Join us as we explore new flavors, master timeless techniques, and celebrate the
     </div>
 
 </footer>
+
+<script>
+    const s = document.querySelectorAll(".Lojtari");
+    let pozita = 0;
+    let intervali = null;
+    
+    slides();
+
+    function slides(){
+        showSlide(pozita);
+        intervali = setInterval(next, 6000);
+    }
+
+    function showSlide(index){
+        if(index >= s.length){
+            pozita = 0;
+        }
+        else if (index < 0){
+            pozita = s.length -1;
+        }
+
+        s.forEach(element=> {
+     element.classList.remove("Shfaqe");
+    });
+
+    s[pozita].classList.add("Shfaqe");
+    }
+
+
+    function next(){
+        pozita++;
+        showSlide(pozita);
+    }
+
+
+</script>
+
 </body>
 </html>

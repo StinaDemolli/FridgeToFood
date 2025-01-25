@@ -10,6 +10,7 @@ header {
     width: 100%;
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
@@ -28,11 +29,12 @@ div .Logo {
 }
 
 .Navigimi {
-    width: 600px;
+    width: 50%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .Menus ul {
@@ -42,7 +44,7 @@ div .Logo {
     justify-content: space-around;
     align-items: flex-end;
     list-style: none;
-    padding-top: 60px;
+    padding-top: 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -64,17 +66,16 @@ div .Logo {
 
 .BigBut {
     width: 200px;
-    height: 150px;
+    height: 120px;
+    padding-top: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 
-
 .LogButt {
-    padding: 10px 0 10px 50px;
-    width: 100px;
+    padding: 10px 30px;
     display: inline-block;
     border-radius: 15px;
     border: 1px solid #2B2B2B;
@@ -146,6 +147,8 @@ div .Logo {
     height: 250px;
     display: flex;
     flex-direction: column;
+    flex: 3;
+    overflow: hidden;
     justify-content: flex-end;
     align-items: center;
 }
@@ -193,6 +196,7 @@ footer {
     box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: #E1DACA;
+    overflow: hidden;
 }
 
 .footer {
@@ -290,4 +294,49 @@ footer .Logo {
 .MiniNav a:hover {
     background-color: white;
     color: black; 
+}
+
+
+
+@media screen and (max-width: 600px) {
+
+    header{
+        font-size: small;
+        height: 80px;
+        /* justify-content: center; */
+    }
+
+    .Navigimi {
+        width: 60%;
+        font-size: smaller;
+    }
+
+    .Menus ul {
+    width: 100%;
+    height: auto;
+    font-size: smaller;
+}
+    .Menus a {
+        padding: 5px;
+    }
+
+    .Logo img {
+    width: 50px;
+    height: 50px;
+}
+    div .Logo {
+    padding-top: 10px;
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+}
+.LogButt {
+    padding: 5px 10px;
+    font-size: smaller;
+}
+.BigBut {
+    width: auto;
+    height: auto;
+}
+
 }

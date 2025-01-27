@@ -1,3 +1,53 @@
+<?php
+
+include 'db_connection.php';
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   
+    $fullName = trim($_POST['full_name']);
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $phoneNumber = trim($_POST['phone_number']);
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirm_password'];
+    $role = 'user'; 
+
+   
+    if (empty($fullName) || empty($username) || empty($email) || empty($phoneNumber) || empty($password) || empty($confirmPassword)) {
+        echo "All fields are required.";
+        exit;
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Invalid email format.";
+        exit;
+    }
+
+    if ($password !== $confirmPassword) {
+        echo "Passwords do not match.";
+        exit;
+    }
+
+    
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+   
+    $stmt = $conn->prepare("INSERT INTO users (full_name, username, email, phone_number, password, role) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $fullName, $username, $email, $phoneNumber, $hashedPassword, $role);
+
+   
+    if ($stmt->execute()) {
+        echo "Registration successful.";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,10 +81,10 @@
         <div class="Menus">
 
             <ul>
-                <li class="crumb"><a href="HomePage.html"> Home </a></li>
-                <li class="crumb"><a href="recipes.html"> Recipes </a></li>
-                <li class="crumb"><a href="AboutUs.html"> About Us </a></li>
-                <li class="crumb"><a href="contact.html"> Contact </a></li>
+                <li class="crumb"><a href="HomePage.php"> Home </a></li>
+                <li class="crumb"><a href="recipes.php"> Recipes </a></li>
+                <li class="crumb"><a href="AboutUs.php"> About Us </a></li>
+                <li class="crumb"><a href="contact.php"> Contact </a></li>
 
             </ul>
             
@@ -42,7 +92,7 @@
     </nav>
 
         <div class="BigBut">
-            <a href="Login.html" class="LogButt">Login</a>
+            <a href="Login.php" class="LogButt">Login</a>
             </div>
     
 
@@ -54,38 +104,38 @@
     <div class="trupp">
 
     <div class="wrapper">
-        <form action="">
+        <form action="register.php" method="POST">
             <h1>Registration</h1>
             <div class="input-box">
                 <div class="input-field">
-                    <input type="text" placeholder="Full Name" required>
+                    <input type="text"  name="full_name" placeholder="Full Name" required>
                     <i class='bx bx-user'></i>
                 </div>
                 <div class="input-field">
-                    <input type="text" placeholder="Username" required>
+                    <input type="text"   name="username"  placeholder="Username" required>
                     <i class='bx bx-user'></i>
                 </div>
             </div>
 
             <div class="input-box">
                 <div class="input-field">
-                    <input type="email" placeholder="Email" required>
+                    <input type="email" name="email" placeholder="Email" required>
                     <i class='bx bx-envelope' ></i>
                 </div>
 
                 <div class="input-field">
-                    <input type="number" placeholder="Phone Number" required>
+                    <input type="number" name="phone_number" placeholder="Phone Number" required>
                     <i class='bx bx-phone' ></i>
                 </div>
             </div>
 
             <div class="input-box">
                 <div class="input-field">
-                    <input type="password" placeholder="Password" required>
+                    <input type="password" name="password" placeholder="Password" required>
                     <i class='bx bx-lock-alt' ></i>
                 </div>
                 <div class="input-field">
-                    <input type="password" placeholder="Confirm Password" required>
+                    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
                     <i class='bx bx-lock-alt' ></i>
                 </div>
             </div>
@@ -111,9 +161,9 @@
 
             <div class="Kembet" class="more">
             
-                <a href="recipes.html">Recipes</a>
-                <a href="AboutUs.html">About Us</a>
-                <a href="contact.html">Contact</a>
+                <a href="recipes.php">Recipes</a>
+                <a href="AboutUs.php">About Us</a>
+                <a href="contact.php">Contact</a>
             
             </div>
             <div class="Kembet" class="more">

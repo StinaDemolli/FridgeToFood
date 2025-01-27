@@ -10,9 +10,9 @@
 
                 <div class="Kembet" class="more">
                 
-                    <a href="recipes.html">Recipes</a>
-                    <a href="AboutUs.html">About Us</a>
-                    <a href="contact.html">Contact</a>
+                    <a href="recipes.php">Recipes</a>
+                    <a href="AboutUs.php">About Us</a>
+                    <a href="contact.php">Contact</a>
                 
                 </div>
                 <div class="Kembet" class="more">

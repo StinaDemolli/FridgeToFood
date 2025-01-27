@@ -22,16 +22,16 @@
         <div class="Menus">
 
             <ul>
-                <li class="crumb"><a href="HomePage.html"> Home </a></li>
-                <li class="crumb"><a href="recipes.html"> Recipes </a></li>
-                <li class="crumb"><a href="AboutUs.html"> About Us </a></li>
-                <li class="crumb"><a href="contact.html"> Contact </a></li>
+                <li class="crumb"><a href="HomePage.php"> Home </a></li>
+                <li class="crumb"><a href="recipes.php"> Recipes </a></li>
+                <li class="crumb"><a href="AboutUs.php"> About Us </a></li>
+                <li class="crumb"><a href="contact.php"> Contact </a></li>
             </ul>
         </div>
     </nav>
 
         <div class="BigBut">
-            <a href="Login.html" class="LogButt">Login</a>
+            <a href="Login.php" class="LogButt">Login</a>
             </div>
         </header>
 
@@ -44,9 +44,9 @@
         <div class="navbar">
             <nav class="MiniNav">
                 <ul>
-                    <li><a href="recipes.html">Explore</a></li>
-                    <li><a href="FindRecipe.html">Find Recipes</a></li>
-                    <li><a href="shareYO.html">Share Your Own</a></li>
+                    <li><a href="recipes.php">Explore</a></li>
+                    <li><a href="FindRecipe.php">Find Recipes</a></li>
+                    <li><a href="shareYO.php">Share Your Own</a></li>
                 </ul>
             </nav>
         </div>
@@ -237,9 +237,9 @@
 
                 <div class="Kembet" class="more">
                 
-                    <a href="recipes.html">Recipes</a>
-                    <a href="AboutUs.html">About Us</a>
-                    <a href="contact.html">Contact</a>
+                    <a href="recipes.php">Recipes</a>
+                    <a href="AboutUs.php">About Us</a>
+                    <a href="contact.php">Contact</a>
                 
                 </div>
                 <div class="Kembet" class="more">

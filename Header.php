@@ -9,10 +9,10 @@
         <div class="Menus">
 
             <ul>
-                <li class="crumb"><a href="HomePage.html"> Home </a></li>
-                <li class="crumb"><a href="recipes.html"> Recipes </a></li>
-                <li class="crumb"><a href="AboutUs.html"> About Us </a></li>
-                <li class="crumb"><a href="contact.html"> Contact </a></li>
+                <li class="crumb"><a href="HomePage.php"> Home </a></li>
+                <li class="crumb"><a href="recipes.php"> Recipes </a></li>
+                <li class="crumb"><a href="AboutUs.php"> About Us </a></li>
+                <li class="crumb"><a href="contact.php"> Contact </a></li>
 
             </ul>
             
@@ -20,7 +20,7 @@
     </nav>
 
         <div class="BigBut">
-            <a href="Login.html" class="LogButt">Login</a>
+            <a href="Login.php" class="LogButt">Login</a>
             </div>
     
 

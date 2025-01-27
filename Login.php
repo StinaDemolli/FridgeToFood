@@ -1,3 +1,47 @@
+<?php
+include 'db_connection.php';
+
+session_start();
+
+if (isset($_SESSION['username'])) {
+    header("Location: HomePage.php");
+    exit;
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = trim($_POST['username']);
+    $password = $_POST['password'];
+
+    if (!empty($username) && !empty($password)) {
+        $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows > 0) {
+            $stmt->bind_result($hashedPassword);
+            $stmt->fetch();
+
+            if (password_verify($password, $hashedPassword)) {
+                
+                $_SESSION['username'] = $username;
+                header("Location: HomePage.php");
+                exit;
+            } else {
+                $error = "Invalid username or password.";
+            }
+        } else {
+            $error = "Invalid username or password.";
+        }
+        $stmt->close();
+    } else {
+        $error = "Please fill in both fields.";
+    }
+    $conn->close();
+}
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,31 +119,22 @@
 
         
         <div class="trupi">
-    
-    
-    <div class="Logini">
-        <h1>Log in</h1>
-    <ul type="none">
 
-        <li>Please enter your information:</li>
-        
-        <div class="Hyrja">
-        <li> <input type="text" id="Username" placeholder="Username" required> 
-        <i class='bx bx-user' ></i></li>
-        <li> <input type="password" id="Password" name="" placeholder="Password" required>
-        <i class='bx bx-lock-alt' ></i> </li>
+        <div class="Logini">
+            <h1>Log in</h1>
+            <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+            <form id="Login" method="POST" action="">
+                <ul type="none">
+                    <li><input type="text" id="Username" name="username" placeholder="Username" required><i class='bx bx-user'></i></li>
+                    <li><input type="password" id="Password" name="password" placeholder="Password" required><i class='bx bx-lock-alt'></i></li>
+                </ul>
+                <div class="But">
+                    <button type="submit">Log in</button>
+                </div>
+            </form>
+            <h3><a href="Register.php">Or Sign up</a></h3>
         </div>
-    </ul> 
-
-    <form id="Login">
-        <div class="But">
-          <button type="submit">Log in</button>
-      </form>
-        <h3><a href="Register.php">Or Sign up</a></h3>
-
     </div>
-    </div>
-</div>
 
 <footer>
     <div class="footer">

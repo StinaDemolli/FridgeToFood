@@ -408,7 +408,7 @@ footer .Logo {
     padding-top: 10px;
     }
 
-    
+}
 
 @media screen and (max-width: 768px) {   
     header{
@@ -471,7 +471,7 @@ footer {
     width: 100%;
 }
 footer .Logo {
-    padding-top: 30px;
+    padding-top: 50px;
     padding-left: 30px;
     height: 80px;
     width: 80px;
@@ -505,5 +505,59 @@ footer .Logo {
     .Kembet .more {
     padding-top: 10px;
     }
+    .Recetat h1 {
+        font-size: x-small;
+    }
+
+    .RecetatContainer {
+        gap: 0.5rem;
+    }
+
+    .RecetatBox {
+        width: 100%; 
+        margin: 0.5rem 0;
+    }
+
+    .RecetatBox img {
+        height: 8rem;
+    }
+
+    .RecetatBox h2 {
+        font-size: 1.2rem;
+    }
+
+    .RecetatBox p {
+        font-size: 1rem;
+    }
+
+    .MiniNav {
+        width: 20rem; 
+        height: 2.5rem;
+    }
+
+    .MiniNav ul {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .MiniNav li {
+        margin: 0;
+    }
+
+    .MiniNav a {
+        padding: 5px 10px;
+        font-size: x-small;
+    }
+
+    .sliderii {
+        height: auto;
+    }
+
+    .arrow button {
+        width: 15px;
+        height: 35px;
+    }
+    
  
 }

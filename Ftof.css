@@ -3,6 +3,7 @@
     padding: 0;
 }
 
+
 header {
     margin-top: -20px;
     background-color: #2B2B2B;
@@ -146,35 +147,13 @@ div .Logo {
     width: 250px;
     height: 250px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex: 3;
     overflow: hidden;
     justify-content: flex-end;
     align-items: center;
 }
 
-
-.TeReja img {
-    width: 250px;
-    height: 250px;
-    object-fit: cover;
-    position: absolute;
-    z-index: -1;
-}
-
-.TeReja p, .TeReja h2 {
-    color: white;
-    -webkit-text-stroke-width: 0.5px;
-    -webkit-text-stroke-color: black;
-    padding: 0px 4px 10px 4px;
-    text-align: center;
-}
-.TeReja p {
-    color: white;
-    -webkit-text-stroke-width: 0.2px;
-    -webkit-text-stroke-color: black;
-    padding: 0px 3px 10px 5px;
-}
 
 
 .New {
@@ -187,8 +166,47 @@ div .Logo {
     align-items: center;
 }
 
+.RecetatBox {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 280px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+.RecetatBox img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.RecetatBox:hover {
+    transform: translateY(-5px);
+}
+
+.RecetatBox img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.RecetatBox h2 {
+    font-size: 1.5em;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.RecetatBox p {
+    font-size: 1em;
+    color: #666;
+    line-height: 1.5;
+}
+
 footer {
-    margin-top: 20px;
+    margin-top: 90px;
     width: 100%;
     height: 400px;
     background-color: #2B2B2B; 
@@ -196,7 +214,7 @@ footer {
     box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: #E1DACA;
-    overflow: hidden;
+    
 }
 
 .footer {
@@ -211,23 +229,23 @@ footer {
     width: 150px;
     display: flex;
     flex-direction: column;
-}
+    }
 
-.Kembet h3 {
+    .Kembet h3 {
     padding-bottom: 20px;
-}
+    }
 
-.Kembet img {
+    .Kembet img {
     width: 20px;
     height: 20px;
-   
-}
-.Kembet a {
+
+    }
+    .Kembet a {
     text-decoration: none;
     color: #bcb3a0; 
     margin-top: 10px;
-}
-.Linqet {
+    }
+    .Linqet {
     width: 60%;
     padding-top: 10px;
     padding-left: 80px;
@@ -235,10 +253,10 @@ footer {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-}
-.Kembet .more {
+    }
+    .Kembet .more {
     padding-top: 100px;
-}
+    }
 
 footer .Logo {
     padding-top: 70px;
@@ -303,7 +321,6 @@ footer .Logo {
     header{
         font-size: small;
         height: 80px;
-        /* justify-content: center; */
     }
 
     .Navigimi {
@@ -338,5 +355,53 @@ footer .Logo {
     width: auto;
     height: auto;
 }
+.Bigbox {
+    height: 200px;
+}
+
+.Prsh {
+    width: 150px;
+    height: 70px;
+    font-size: x-small;
+}
+footer {
+    margin-top: 60px;
+    height: 200px;
+    
+}
+
+footer .Logo {
+    padding-top: 30px;
+    padding-left: 30px;
+    height: 80px;
+    width: 80px;
+}
+
+.Kembet {
+    padding-top: 10px;
+    width:70px;
+    }
+
+    .Kembet h3 {
+    padding-bottom: 6px;
+    font-size: x-small;
+    }
+
+    .Kembet img {
+    width: 10px;
+    height: 10px;
+
+    }
+    
+    .Linqet {
+    height: 200px;
+    padding-top: 3px;
+    padding-left: 20px;
+    justify-content: space-between;
+    font-size: x-small;
+    }
+    .Kembet .more {
+    padding-top: 10px;
+    }
 
 }

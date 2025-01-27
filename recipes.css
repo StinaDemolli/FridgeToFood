@@ -1,55 +1,50 @@
 .Recetat {
     text-align: center;
-    padding: 20px;
+    padding: 1.25rem;
 }
 
 .Recetat h1 {
     font-size: 2.5em;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     color: #333;
 }
 
 .RecetatContainer {
     display: flex;
     justify-content: center;
-    gap: 25px;
+    gap: 1.5625rem;
     flex-wrap: wrap;
     flex: 5;
-    padding-bottom: 30px;
+    padding-bottom: 1.875rem;
     overflow: hidden;
 }
 
 .RecetatBox {
     background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    width: 280px;
-    padding: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 0.0625rem solid #ddd;
+    border-radius: 0.625rem;
+    width: 17.5rem;
+    padding: 0.9375rem;
+    box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
 }
 .RecetatBox img {
     width: 100%;
-    height: 250px;
+    height: 15.625rem;
     object-fit: cover;
-    border-radius: 15px;
-    margin-bottom: 15px;
+    border-radius: 0.9375rem;
+    margin-bottom: 0.9375rem;
 }
 
 .RecetatBox:hover {
-    transform: translateY(-5px);
+    transform: translateY(-0.3125rem); /*5px*/
 }
 
-.RecetatBox img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
 
 .RecetatBox h2 {
     font-size: 1.5em;
     color: #444;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
 }
 
 .RecetatBox p {
@@ -63,16 +58,16 @@
 
 .MiniNav {
     background-color: #666;
-    margin-top: -22px;   
-    margin-bottom: 40px;
-    width: 600px;
-    height: 80px;
+    margin-top: -1.375rem;   
+    margin-bottom: 2.5rem;
+    width: 37.5rem;
+    height: 5rem;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;  
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 0.625rem;
+    border-bottom-left-radius: 0.625rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color:#9f9888;
 }
@@ -97,15 +92,15 @@ body {
 }
 
 .MiniNav li {
-    margin: 0 20px; 
+    margin: 0 1.25rem; 
 }
 
 .MiniNav a {
     text-decoration: none;
     color: white;
     font-weight: bold;
-    padding: 8px 20px;
-    border-radius: 5px;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.3125rem;
     transition: background-color 0.3s ease;
 }
 
@@ -119,14 +114,14 @@ body {
 
 
 .sliimg img {
-    width: 200px;
-    height: 200px;
+    width: 12.5rem;
+    height: 12.5rem;
     display: none;
 }
 
 .sliderii {
     width: 100%;
-    height: 300px;
+    height: 18.75rem;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -139,7 +134,7 @@ img.Shfaqe {
 }
 
 .slidestot {
-    width: 300px;
+    width: 18.75rem;
     height: auto;
     display: flex;
     justify-content: center;
@@ -148,9 +143,9 @@ img.Shfaqe {
 
 .arrow button {
     border: #444;
-    width: 20px;
-    height: 45px;
-    margin: 0px 40px;
+    width: 1.25rem;
+    height: 2.8125rem;
+    margin: 0 2.5rem;
 }
 
 

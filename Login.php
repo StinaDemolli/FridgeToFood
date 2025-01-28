@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     
 
-    <div class="Header">
+    <!-- <div class="Header">
         <header>
 
             <div class="Logo" >
@@ -114,8 +114,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
     
 
-
-        </header>
+</div>
+        </header> -->
 
         
         <div class="trupi">
@@ -125,8 +125,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
             <form id="Login" method="POST" action="">
                 <ul type="none">
+                    <div class="Hyrja">
                     <li><input type="text" id="Username" name="username" placeholder="Username" required><i class='bx bx-user'></i></li>
                     <li><input type="password" id="Password" name="password" placeholder="Password" required><i class='bx bx-lock-alt'></i></li>
+                </div>
                 </ul>
                 <div class="But">
                     <button type="submit">Log in</button>

@@ -38,13 +38,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    
     if ($stmt->execute()) {
-        echo "Registration successful.";
+        header("Location: Login.php");
     } else {
         echo "Error: " . $stmt->error;
     }
 
     $stmt->close();
     $conn->close();
+
+    
+}
+
+session_start();
+
+if (isset($_SESSION['username'])) {
+    header("Location: HomePage.php");
+    exit;
 }
 ?>
 

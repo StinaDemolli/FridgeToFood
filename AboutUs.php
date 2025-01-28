@@ -1,3 +1,12 @@
+<?php
+session_start(); 
+
+if (!isset($_SESSION['username'])) {
+    header("Location: Login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,35 +25,40 @@
 
 <body>
 
-    <div class="Header">
-        <header>
 
-            <div class="Logo" >
-        <img src="Images/logoFf.png" alt="logo">
-            </div>
 
-    <nav class="Navigimi">
-        <div class="Menus">
 
-            <ul>
-                <li class="crumb"><a href="HomePage.php"> Home </a></li>
-                <li class="crumb"><a href="recipes.php"> Recipes </a></li>
-                <li class="crumb"><a href="AboutUs.php"> About Us </a></li>
-                <li class="crumb"><a href="contact.php"> Contact </a></li>
+<div class="Header">
+            <header>
+                <div class="Logo">
+                    <img src="Images/logoFf.png" alt="logo">
+                </div>
 
-            </ul>
-            
+                <nav class="Navigimi">
+                    <div class="Menus">
+                        <ul>
+                            <li class="crumb"><a href="HomePage.php"> Home </a></li>
+                            <li class="crumb"><a href="recipes.php"> Recipes </a></li>
+                            <li class="crumb"><a href="AboutUs.php"> About Us </a></li>
+                            <li class="crumb"><a href="contact.php"> Contact </a></li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <div class="BigBut">
+                  
+                    <?php if (isset($_SESSION['username'])): ?>
+                        <a href="Logout.php" class="LogButt">Logout</a>
+                    <?php else: ?>
+                        <a href="Login.php" class="LogButt">Login</a>
+                    <?php endif; ?>
+                </div>
+            </header>
         </div>
-    </nav>
-
-        <div class="BigBut">
-            <a href="Login.php" class="LogButt">Login</a>
-            </div>
-    
 
 
-        </header>
-    </div>
+
+
 
 
 

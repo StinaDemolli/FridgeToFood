@@ -1,23 +1,61 @@
 <?php
+include 'db_connection.php';
 session_start();
 
-if (!isset($_SESSION['username'])) {
+
+if (!isset($_SESSION['username']) || !isset($_SESSION['role'])) {
     header("Location: Login.php");
     exit;
 }
+
+if ($_SESSION['role'] !== 'admin') {
+    header("Location: HomePage.php");
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['create'])) {
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $image_url = $_POST['image_url'];
+
+        $stmt = $conn->prepare("INSERT INTO recipes (title, description, image_url) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $title, $description, $image_url);
+        $stmt->execute();
+        $stmt->close();
+    } elseif (isset($_POST['update'])) {
+        $id = $_POST['id'];
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $image_url = $_POST['image_url'];
+
+        $stmt = $conn->prepare("UPDATE recipes SET title = ?, description = ?, image_url = ? WHERE id = ?");
+        $stmt->bind_param("sssi", $title, $description, $image_url, $id);
+        $stmt->execute();
+        $stmt->close();
+    } elseif (isset($_POST['delete'])) {
+        $id = $_POST['id'];
+
+        $stmt = $conn->prepare("DELETE FROM recipes WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $stmt->close();
+    }
+}
+
+$result = $conn->query("SELECT * FROM recipes ORDER BY created_at DESC");
+$recipes = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>FridgeToFood</title>
+<head>
+    <title>Admin Dashboard - Manage Recipes</title>
+    <link rel="stylesheet" href="Ftof.css">
+</head>
+<body>
 
-        <link rel="stylesheet" href="FtoF.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-
-    <body>
-    <div class="Header">
+<div class="Header">
             <header>
                 <div class="Logo">
                     <img src="Images/logoFf.png" alt="logo">
@@ -47,42 +85,31 @@ if (!isset($_SESSION['username'])) {
             </header>
         </div>
 
-        <div class="Bigbox">
-            <div class="Prsh">
-                <h1>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
-                <h3>Are you hungry?</h3>
-                <hr>
-                <h4>Join us as we discover amazing recipes from all around the world. You can even find recipes that match with your ingredients!</h4>
-            </div>
-        </div>
 
-        <div class="Nextbox">
-            <hr id="VijaMes">  
-            <h2>What's New?</h2>
-            <h3>Check out the most trending recipes</h3>
 
-            <div class="New">
-                <div class="RecetatBox">
-                    <img src="Images/shrimptaco.jpg" alt="Receta 3">
-                    <h2>Shrimp Taco</h2>
-                    <p>A shrimp taco recipe combines juicy, seasoned shrimp with fresh toppings for a vibrant, flavorful dish.</p>
-                </div>
+    <h1>Manage Recipes</h1>
+    <form method="POST">
+        <h3>Add New Recipe</h3>
+        <input type="text" name="title" placeholder="Title" required>
+        <textarea name="description" placeholder="Description" required></textarea>
+        <input type="text" name="image_url" placeholder="Image URL" required>
+        <button type="submit" name="create">Add Recipe</button>
+    </form>
 
-                <div class="RecetatBox">
-                    <img src="Images/receta3.jpg" alt="Receta 3">
-                    <h2>Vegetable Stir Fry</h2>
-                    <p>A quick and healthy stir fry loaded with fresh veggies and soy sauce.</p>
-                </div>
+    <h2>All Recipes</h2>
+    <?php foreach ($recipes as $recipe): ?>
+        <form method="POST">
+            <input type="hidden" name="id" value="<?= $recipe['id'] ?>">
+            <input type="text" name="title" value="<?= htmlspecialchars($recipe['title']) ?>" required>
+            <textarea name="description" required><?= htmlspecialchars($recipe['description']) ?></textarea>
+            <input type="text" name="image_url" value="<?= htmlspecialchars($recipe['image_url']) ?>" required>
+            <button type="submit" name="update">Update</button>
+            <button type="submit" name="delete" onclick="return confirm('Are you sure?')">Delete</button>
+        </form>
+    <?php endforeach; ?>
 
-                <div class="RecetatBox">
-                    <img src="Images/receta6.jpg" alt="Receta 3">
-                    <h2>Chocolate Cake</h2>
-                    <p>A rich and moist chocolate cake with a silky chocolate frosting.</p>
-                </div>
-            </div>
-        </div>
 
-        <footer>
+    <footer>
             <div class="footer">
                 <img class="Logo" src="Images/logoFf.png" alt="logo">
 
@@ -108,5 +135,6 @@ if (!isset($_SESSION['username'])) {
                 </div>
             </div>
         </footer>
-    </body>
+
+</body>
 </html>

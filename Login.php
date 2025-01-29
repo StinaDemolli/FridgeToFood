@@ -1,10 +1,13 @@
 <?php
 include 'db_connection.php';
-
 session_start();
 
 if (isset($_SESSION['username'])) {
-    header("Location: HomePage.php");
+    if ($_SESSION['role'] === 'admin') {
+        header("Location: admin_recipes.php");
+    } else {
+        header("Location: HomePage.php");
+    }
     exit;
 }
 
@@ -13,19 +16,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     if (!empty($username) && !empty($password)) {
-        $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
+        $stmt = $conn->prepare("SELECT password, role FROM users WHERE username = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            $stmt->bind_result($hashedPassword);
+            $stmt->bind_result($hashedPassword, $role);
             $stmt->fetch();
 
             if (password_verify($password, $hashedPassword)) {
-                
                 $_SESSION['username'] = $username;
-                header("Location: HomePage.php");
+                $_SESSION['role'] = $role;
+
+                
+                if ($role === 'admin') {
+                    header("Location: admin_recipes.php");
+                } else {
+                    header("Location: HomePage.php");
+                }
                 exit;
             } else {
                 $error = "Invalid username or password.";
@@ -40,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -87,35 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     
-
-    <!-- <div class="Header">
-        <header>
-
-            <div class="Logo" >
-        <img src="Images/logoFf.png" alt="logo">
-            </div>
-
-    <nav class="Navigimi">
-        <div class="Menus">
-
-            <ul>
-                <li class="crumb"><a href="HomePage.php"> Home </a></li>
-                <li class="crumb"><a href="recipes.php"> Recipes </a></li>
-                <li class="crumb"><a href="AboutUs.php"> About Us </a></li>
-                <li class="crumb"><a href="contact.php"> Contact </a></li>
-
-            </ul>
-            
-        </div>
-    </nav>
-
-        <div class="BigBut">
-            <a href="Login.php" class="LogButt">Login</a>
-            </div>
-    
-
-</div>
-        </header> -->
 
         
         <div class="trupi">

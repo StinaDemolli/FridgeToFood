@@ -30,12 +30,14 @@ if (!isset($_SESSION['username'])) {
                             <li class="crumb"><a href="recipes.php"> Recipes </a></li>
                             <li class="crumb"><a href="AboutUs.php"> About Us </a></li>
                             <li class="crumb"><a href="contact.php"> Contact </a></li>
+                            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                        <li class="crumb"><a href="admin_recipes.php"> Dashboard </a></li>
+                    <?php endif; ?>
                         </ul>
                     </div>
                 </nav>
 
                 <div class="BigBut">
-                  
                     <?php if (isset($_SESSION['username'])): ?>
                         <a href="Logout.php" class="LogButt">Logout</a>
                     <?php else: ?>

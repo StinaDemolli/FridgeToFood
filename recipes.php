@@ -8,7 +8,6 @@ if (!isset($_SESSION['username'])) {
 
 include 'db_connection.php'; 
 
-// Fetch recipes dynamically from the database
 $result = $conn->query("SELECT * FROM recipes ORDER BY created_at DESC");
 $recipes = $result->fetch_all(MYSQLI_ASSOC);
 ?>

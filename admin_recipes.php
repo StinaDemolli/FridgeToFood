@@ -52,6 +52,7 @@ $recipes = $result->fetch_all(MYSQLI_ASSOC);
 <head>
     <title>Admin Dashboard - Manage Recipes</title>
     <link rel="stylesheet" href="Ftof.css">
+    <link rel="stylesheet" href="admin_recipes.css">
 </head>
 <body>
 
@@ -85,17 +86,24 @@ $recipes = $result->fetch_all(MYSQLI_ASSOC);
             </header>
         </div>
 
+<div class="Box">
 
-
+    <div class="Boxpar">
     <h1>Manage Recipes</h1>
     <form method="POST">
         <h3>Add New Recipe</h3>
+        <div class="Inp">
         <input type="text" name="title" placeholder="Title" required>
         <textarea name="description" placeholder="Description" required></textarea>
         <input type="text" name="image_url" placeholder="Image URL" required>
+        
         <button type="submit" name="create">Add Recipe</button>
-    </form>
+</div>
 
+    </form>
+    </div>
+
+    <div class="Boxdyt">
     <h2>All Recipes</h2>
     <?php foreach ($recipes as $recipe): ?>
         <form method="POST">
@@ -107,7 +115,10 @@ $recipes = $result->fetch_all(MYSQLI_ASSOC);
             <button type="submit" name="delete" onclick="return confirm('Are you sure?')">Delete</button>
         </form>
     <?php endforeach; ?>
+</div>
 
+
+</div>
 
     <footer>
             <div class="footer">

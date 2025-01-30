@@ -12,12 +12,19 @@ class Session {
     }
 
     public static function get($key) {
-        return $_SESSION[$key] ?? null;
+        return self::isStarted() ? ($_SESSION[$key] ?? null) : null;
     }
 
     public static function destroy() {
-        session_destroy();
-        $_SESSION = [];
+        if (self::isStarted()) {
+            session_unset();  // Clears all session variables
+            session_destroy(); // Destroys the session
+            $_SESSION = [];    // Ensure session is fully cleared
+        }
+    }
+
+    private static function isStarted() {
+        return session_status() === PHP_SESSION_ACTIVE;
     }
 }
 

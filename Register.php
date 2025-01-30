@@ -1,37 +1,31 @@
 <?php
 include_once 'db_connection.php';
 include_once 'User.php';
-include_once 'sessions.php';
-
-Session::start();
-
-if (isset($_SESSION['username'])) {
-    header("Location: HomePage.php");
-    exit;
-}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $db = new Database();
-    $connection = $db->getConnection();
-    $user = new User($connection);
-
-    $full_name = $_POST['full_name'];
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $phone_number = $_POST['phone_number'];
+    $full_name = trim($_POST['full_name']);
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $phone_number = trim($_POST['phone_number']);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
+    // Validate inputs
     if ($password !== $confirm_password) {
         echo "Passwords do not match!";
         exit;
     }
 
+    // Create a new User object
+    $user = new User($conn);
+
+    // Attempt to register the user
     if ($user->register($full_name, $username, $email, $phone_number, $password)) {
-        header("Location: Login.php");
+        echo "Registration successful!";
+        header("Location: login.php"); // Redirect to login page
         exit;
     } else {
-        echo "Error registering user!";
+        echo "Registration failed. Please try again.";
     }
 }
 ?>

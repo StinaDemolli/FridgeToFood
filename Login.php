@@ -1,42 +1,25 @@
 <?php
 include_once 'db_connection.php';
 include_once 'User.php';
-include_once 'sessions.php';
-
-Session::start();
-
-if (isset($_SESSION['username'])) {
-    if ($_SESSION['role'] === 'admin') {
-        header("Location: admin_recipes.php");
-    } else {
-        header("Location: HomePage.php");
-    }
-    exit;
-}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $db = new Database();
-    $connection = $db->getConnection();
-    $user = new User($connection);
-
     $username = trim($_POST['username']);
     $password = $_POST['password'];
 
-    $userData = $user->login($username, $password);
+    // Create a new User object
+    $user = new User($conn);
 
-    if ($userData) {
-        Session::set('user_id', $userData['id']);
-        Session::set('username', $userData['username']);
-        Session::set('role', $userData['role']);
-
-        if ($userData['role'] === 'admin') {
-            header("Location: admin_recipes.php");
+    // Attempt to log in
+    if ($user->login($username, $password)) {
+        echo "Login successful!";
+        if ($_SESSION['role'] === 'admin') {
+            header("Location: admin_recipes.php"); // Redirect to admin dashboard
         } else {
-            header("Location:HomePage.php");
+            header("Location: HomePage.php"); // Redirect to user dashboard
         }
         exit;
     } else {
-        $error = "Invalid login credentials!";
+        echo "Invalid email or password!";
     }
 }
 ?>

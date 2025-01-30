@@ -1,61 +1,63 @@
 <?php
-
 class User {
     private $conn;
+    private $table_name = 'users';
 
-    public function __construct(PDO $db) {
+    public function __construct($db) {
         $this->conn = $db;
     }
 
-    public function register($fullName, $username, $email, $phoneNumber, $password) {
-    
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidArgumentException("Invalid email address.");
-        }
-        if (strlen($password) < 8) {
-            throw new InvalidArgumentException("Password must be at least 8 characters long.");
-        }
+    // Register a new user
+    public function register($full_name, $username, $email, $phone_number, $password) {
+        // Hash the password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $role = 'user'; // Default role
 
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $role = 'user';
-
-        $query = "INSERT INTO users (full_name, username, email, phone_number, password, role) 
+        // Prepare the SQL query
+        $query = "INSERT INTO {$this->table_name} (full_name, username, email, phone_number, password, role) 
                   VALUES (:full_name, :username, :email, :phone_number, :password, :role)";
+        $stmt = $this->conn->prepare($query);
 
-        try {
-            $stmt = $this->conn->prepare($query);
-            $stmt->execute([
-                ':full_name' => $fullName,
-                ':username' => $username,
-                ':email' => $email,
-                ':phone_number' => $phoneNumber,
-                ':password' => $hashedPassword,
-                ':role' => $role
-            ]);
-            return true;
-        } catch (PDOException $e) {
-        
-            error_log("Registration failed: " . $e->getMessage());
-            return false;
-        }
+        // Bind parameters
+        $stmt->bindParam(':full_name', $full_name);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':phone_number', $phone_number);
+        $stmt->bindParam(':password', $hashed_password);
+        $stmt->bindParam(':role', $role);
+
+        // Execute the query
+        return $stmt->execute();
     }
 
-    public function login($username, $password) {
-       
-        $query = "SELECT id, password, role FROM users WHERE username = :username";
+    // Login a user
+    public function login($email, $password) {
+        // Fetch user by email
+        $query = "SELECT id, full_name, username, email, phone_number, password, role 
+                  FROM {$this->table_name} 
+                  WHERE email = :email";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute([':username' => $username]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
 
-        
-        if ($user && password_verify($password, $user['password'])) {
-            return [
-                'id' => $user['id'],
-                'role' => $user['role']
-            ];
+        // Check if user exists
+        if ($stmt->rowCount() > 0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            
+            if (password_verify($password, $row['password'])) {
+                // Start session and store user data
+                session_start();
+                $_SESSION['user_id'] = $row['id'];
+                $_SESSION['full_name'] = $row['full_name'];
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['phone_number'] = $row['phone_number'];
+                $_SESSION['role'] = $row['role'];
+                return true;
+            }
         }
         return false;
     }
 }
-
 ?>

@@ -1,5 +1,8 @@
 <?php
-session_start();
+
+include_once 'sessions.php';
+
+Session::start();
 
 if (!isset($_SESSION['username'])) {
     header("Location: Login.php");

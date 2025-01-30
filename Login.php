@@ -1,6 +1,9 @@
 <?php
-include 'db_connection.php';
-session_start();
+include_once 'db_connection.php';
+include_once 'User.php';
+include_once 'sessions.php';
+
+Session::start();
 
 if (isset($_SESSION['username'])) {
     if ($_SESSION['role'] === 'admin') {
@@ -11,42 +14,30 @@ if (isset($_SESSION['username'])) {
     exit;
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $db = new Database();
+    $connection = $db->getConnection();
+    $user = new User($connection);
+
     $username = trim($_POST['username']);
     $password = $_POST['password'];
 
-    if (!empty($username) && !empty($password)) {
-        $stmt = $conn->prepare("SELECT password, role FROM users WHERE username = ?");
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $stmt->store_result();
+    $userData = $user->login($username, $password);
 
-        if ($stmt->num_rows > 0) {
-            $stmt->bind_result($hashedPassword, $role);
-            $stmt->fetch();
+    if ($userData) {
+        Session::set('user_id', $userData['id']);
+        Session::set('username', $userData['username']);
+        Session::set('role', $userData['role']);
 
-            if (password_verify($password, $hashedPassword)) {
-                $_SESSION['username'] = $username;
-                $_SESSION['role'] = $role;
-
-                
-                if ($role === 'admin') {
-                    header("Location: admin_recipes.php");
-                } else {
-                    header("Location: HomePage.php");
-                }
-                exit;
-            } else {
-                $error = "Invalid username or password.";
-            }
+        if ($userData['role'] === 'admin') {
+            header("Location: admin_recipes.php");
         } else {
-            $error = "Invalid username or password.";
+            header("Location:HomePage.php");
         }
-        $stmt->close();
+        exit;
     } else {
-        $error = "Please fill in both fields.";
+        $error = "Invalid login credentials!";
     }
-    $conn->close();
 }
 ?>
 
@@ -68,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 const user=document.getElementById('Username');
                 const pass=document.getElementById('Password');
 
-                if(user.value === "" || user.value == null){
+                if(user.value.trim() === "" || user.value.trim() == null){
                     alert("Please write your Username");
                     user.focus();
                     return false;

@@ -1,59 +1,38 @@
 <?php
+include_once 'db_connection.php';
+include_once 'User.php';
+include_once 'sessions.php';
 
-include 'db_connection.php';
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   
-    $fullName = trim($_POST['full_name']);
-    $username = trim($_POST['username']);
-    $email = trim($_POST['email']);
-    $phoneNumber = trim($_POST['phone_number']);
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirm_password'];
-    $role = 'user'; 
-
-   
-    if (empty($fullName) || empty($username) || empty($email) || empty($phoneNumber) || empty($password) || empty($confirmPassword)) {
-        echo "All fields are required.";
-        exit;
-    }
-
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Invalid email format.";
-        exit;
-    }
-
-    if ($password !== $confirmPassword) {
-        echo "Passwords do not match.";
-        exit;
-    }
-
-    
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-   
-    $stmt = $conn->prepare("INSERT INTO users (full_name, username, email, phone_number, password, role) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $fullName, $username, $email, $phoneNumber, $hashedPassword, $role);
-
-   
-    if ($stmt->execute()) {
-        header("Location: Login.php");
-    } else {
-        echo "Error: " . $stmt->error;
-    }
-
-    $stmt->close();
-    $conn->close();
-
-    
-}
-
-session_start();
+Session::start();
 
 if (isset($_SESSION['username'])) {
     header("Location: HomePage.php");
     exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $db = new Database();
+    $connection = $db->getConnection();
+    $user = new User($connection);
+
+    $full_name = $_POST['full_name'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $phone_number = $_POST['phone_number'];
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+
+    if ($password !== $confirm_password) {
+        echo "Passwords do not match!";
+        exit;
+    }
+
+    if ($user->register($full_name, $username, $email, $phone_number, $password)) {
+        header("Location: Login.php");
+        exit;
+    } else {
+        echo "Error registering user!";
+    }
 }
 ?>
 

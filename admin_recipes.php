@@ -52,6 +52,7 @@ $recipes = $result->fetch_all(MYSQLI_ASSOC);
 <head>
     <title>Admin Dashboard - Manage Recipes</title>
     <link rel="stylesheet" href="Ftof.css">
+    <link rel="stylesheet" href="admin_recipes.css">
 </head>
 <body>
 
@@ -86,27 +87,44 @@ $recipes = $result->fetch_all(MYSQLI_ASSOC);
         </div>
 
 
+        <div class="Box">
+
+
+        <div class="Boxpar">
 
     <h1>Manage Recipes</h1>
     <form method="POST">
         <h3>Add New Recipe</h3>
+
+        <div class="Inp">
+
         <input type="text" name="title" placeholder="Title" required>
         <textarea name="description" placeholder="Description" required></textarea>
         <input type="text" name="image_url" placeholder="Image URL" required>
         <button type="submit" name="create">Add Recipe</button>
+
     </form>
+    </div>
+    </div>
+
+    <div class="Boxdyt">
 
     <h2>All Recipes</h2>
     <?php foreach ($recipes as $recipe): ?>
         <form method="POST">
+            <div class="Inner">
             <input type="hidden" name="id" value="<?= $recipe['id'] ?>">
             <input type="text" name="title" value="<?= htmlspecialchars($recipe['title']) ?>" required>
             <textarea name="description" required><?= htmlspecialchars($recipe['description']) ?></textarea>
             <input type="text" name="image_url" value="<?= htmlspecialchars($recipe['image_url']) ?>" required>
             <button type="submit" name="update">Update</button>
             <button type="submit" name="delete" onclick="return confirm('Are you sure?')">Delete</button>
+            </div>
         </form>
     <?php endforeach; ?>
+    </div>
+
+    </div>
 
 
     <footer>

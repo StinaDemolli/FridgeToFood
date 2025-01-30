@@ -1,20 +1,18 @@
 <?php
-include_once 'Session.php';
+session_start(); 
 
-Session::start();
-
-if (!Session::get('id')) {
-    header("Location: login.php");
-    exit;
+if (!isset($_SESSION['username'])) {
+    header("Location: Login.php");
+    exit();
 }
-?>
-
-
 include 'db_connection.php'; 
+
 
 $result = $conn->query("SELECT * FROM recipes ORDER BY created_at DESC");
 $recipes = $result->fetch_all(MYSQLI_ASSOC);
 ?>
+?>
+
 
 <!DOCTYPE html>
 <html>

@@ -1,34 +1,53 @@
 <?php
-include_once 'db_connection.php';
-include_once 'User.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $full_name = trim($_POST['full_name']);
+include 'db_connection.php';
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   
+    $fullName = trim($_POST['full_name']);
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
-    $phone_number = trim($_POST['phone_number']);
+    $phoneNumber = trim($_POST['phone_number']);
     $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
+    $confirmPassword = $_POST['confirm_password'];
+    $role = 'user'; 
 
-    // Validate inputs
-    if ($password !== $confirm_password) {
-        echo "Passwords do not match!";
+   
+    if (empty($fullName) || empty($username) || empty($email) || empty($phoneNumber) || empty($password) || empty($confirmPassword)) {
+        echo "All fields are required.";
         exit;
     }
 
-    // Create a new User object
-    $user = new User($conn);
-
-    // Attempt to register the user
-    if ($user->register($full_name, $username, $email, $phone_number, $password)) {
-        echo "Registration successful!";
-        header("Location: login.php"); // Redirect to login page
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Invalid email format.";
         exit;
+    }
+
+    if ($password !== $confirmPassword) {
+        echo "Passwords do not match.";
+        exit;
+    }
+
+    
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+   
+    $stmt = $conn->prepare("INSERT INTO users (full_name, username, email, phone_number, password, role) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $fullName, $username, $email, $phoneNumber, $hashedPassword, $role);
+
+   
+    if ($stmt->execute()) {
+        echo "Registration successful.";
     } else {
-        echo "Registration failed. Please try again.";
+        echo "Error: " . $stmt->error;
     }
+
+    $stmt->close();
+    $conn->close();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

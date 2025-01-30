@@ -1,29 +1,55 @@
 <?php
-include_once 'db_connection.php';
-include_once 'User.php';
+include 'db_connection.php';
+session_start();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if (isset($_SESSION['username'])) {
+
+    if ($_SESSION['role'] === 'admin') {
+        header("Location: admin_recipes.php");
+    } else {
+        header("Location: HomePage.php");
+    }
+    exit;
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
 
-    // Create a new User object
-    $user = new User($conn);
+    if (!empty($username) && !empty($password)) {
+        $stmt = $conn->prepare("SELECT password, role FROM users WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->store_result();
 
-    // Attempt to log in
-    if ($user->login($username, $password)) {
-        echo "Login successful!";
-        if ($_SESSION['role'] === 'admin') {
-            header("Location: admin_recipes.php"); // Redirect to admin dashboard
+        if ($stmt->num_rows > 0) {
+            $stmt->bind_result($hashedPassword, $role);
+            $stmt->fetch();
+
+            if (password_verify($password, $hashedPassword)) {
+                
+                $_SESSION['username'] = $username;
+                $_SESSION['role'] = $role;
+
+                if ($role === 'admin') {
+                    header("Location: admin_recipes.php");
+                } else {
+                    header("Location: HomePage.php");
+                }
+                exit;
+            } else {
+                $error = "Invalid username or password.";
+            }
         } else {
-            header("Location: HomePage.php"); // Redirect to user dashboard
+            $error = "Invalid username or password.";
         }
-        exit;
+        $stmt->close();
     } else {
-        echo "Invalid email or password!";
+        $error = "Please fill in both fields.";
     }
+    $conn->close();
 }
 ?>
-
 
 
 <!DOCTYPE html>

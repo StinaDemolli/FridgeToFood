@@ -1,10 +1,10 @@
 <?php
-include_once 'Session.php';
 
-Session::start();
-Session::destroy();
+session_start();
+session_unset();
+session_destroy();
 
-header("Location: login.php");
+header("Location: Login.php");
 exit;
 
 ?>

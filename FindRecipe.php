@@ -1,13 +1,12 @@
 <?php
-include_once 'Session.php';
+session_start(); 
 
-Session::start();
-
-if (!Session::get('id')) {
-    header("Location: login.php");
-    exit;
+if (!isset($_SESSION['username'])) {
+    header("Location: Login.php");
+    exit();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

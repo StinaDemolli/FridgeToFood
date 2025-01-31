@@ -1,19 +1,18 @@
 <?php
-
-include 'db_connection.php';
+session_start();
+require_once 'User.php';
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   
+    $user = new User();
+
     $fullName = trim($_POST['full_name']);
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $phoneNumber = trim($_POST['phone_number']);
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm_password'];
-    $role = 'user'; 
 
-   
     if (empty($fullName) || empty($username) || empty($email) || empty($phoneNumber) || empty($password) || empty($confirmPassword)) {
         echo "All fields are required.";
         exit;
@@ -29,22 +28,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-   
-    $stmt = $conn->prepare("INSERT INTO users (full_name, username, email, phone_number, password, role) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $fullName, $username, $email, $phoneNumber, $hashedPassword, $role);
 
-   
-    if ($stmt->execute()) {
-        echo "Registration successful.";
+    $message = $user->register($fullName, $username, $email, $phoneNumber, $password, $confirmPassword);
+
+    if ($message === "Registration successful.") {
+        header("Location: Login.php"); 
+        exit();
     } else {
-        echo "Error: " . $stmt->error;
+        echo "<script>alert('$message');</script>";
     }
-
-    $stmt->close();
-    $conn->close();
 }
 ?>
 
@@ -74,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="trupp">
 
     <div class="wrapper">
-        <form action="register.php" method="POST">
+        <form action="Register.php" method="POST">
             <h1>Registration</h1>
             <div class="input-box">
                 <div class="input-field">

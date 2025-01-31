@@ -1,16 +1,14 @@
 <?php
-session_start(); 
+session_start();
+require_once 'Recipe.php';
 
 if (!isset($_SESSION['username'])) {
     header("Location: Login.php");
     exit();
 }
-include 'db_connection.php'; 
 
-
-$result = $conn->query("SELECT * FROM recipes ORDER BY created_at DESC");
-$recipes = $result->fetch_all(MYSQLI_ASSOC);
-?>
+$recipeObj = new Recipe();
+$recipes = $recipeObj->getAllRecipes();
 ?>
 
 

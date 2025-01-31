@@ -1,12 +1,22 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "web_projekti"; 
+class Database {
+    private $host = "localhost";
+    private $dbname = "web_projekti"; 
+    private $username = "root";
+    private $password = "";
+    private $conn;
 
-$conn = new mysqli($servername, $username, $password, $database);
+    public function __construct() {
+        try {
+            $this->conn = new PDO("mysql:host={$this->host};dbname={$this->dbname};charset=utf8", $this->username, $this->password);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            die("Database connection failed: " . $e->getMessage());
+        }
+    }
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    public function getConnection() {
+        return $this->conn;
+    }
 }
 ?>

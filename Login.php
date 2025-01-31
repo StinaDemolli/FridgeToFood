@@ -1,53 +1,27 @@
 <?php
-include 'db_connection.php';
+require_once 'User.php'; 
+
 session_start();
-
 if (isset($_SESSION['username'])) {
-
-    if ($_SESSION['role'] === 'admin') {
-        header("Location: admin_recipes.php");
-    } else {
-        header("Location: HomePage.php");
-    }
+    header("Location: " . ($_SESSION['role'] === 'admin' ? "admin_recipes.php" : "HomePage.php"));
     exit;
 }
+
+$error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
 
-    if (!empty($username) && !empty($password)) {
-        $stmt = $conn->prepare("SELECT password, role FROM users WHERE username = ?");
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $stmt->store_result();
+    $user = new User();
+    $result = $user->login($username, $password);
 
-        if ($stmt->num_rows > 0) {
-            $stmt->bind_result($hashedPassword, $role);
-            $stmt->fetch();
-
-            if (password_verify($password, $hashedPassword)) {
-                
-                $_SESSION['username'] = $username;
-                $_SESSION['role'] = $role;
-
-                if ($role === 'admin') {
-                    header("Location: admin_recipes.php");
-                } else {
-                    header("Location: HomePage.php");
-                }
-                exit;
-            } else {
-                $error = "Invalid username or password.";
-            }
-        } else {
-            $error = "Invalid username or password.";
-        }
-        $stmt->close();
+    if ($result === "admin_recipes.php" || $result === "HomePage.php") {
+        header("Location: $result");
+        exit;
     } else {
-        $error = "Please fill in both fields.";
+        $error = $result;
     }
-    $conn->close();
 }
 ?>
 
@@ -71,12 +45,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if(user.value.trim() === "" || user.value.trim() == null){
                     alert("Please write your Username");
                     user.focus();
-                    return false;
+                    ngjarja.preventDefault();
                 }
                 if(pass.value === "" || pass.value == null){
                     alert("Please write your Password");
                     pass.focus();
-                    return false;
+                    ngjarja.preventDefault();
                 }
 
 

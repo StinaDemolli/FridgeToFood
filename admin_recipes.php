@@ -1,50 +1,5 @@
 <?php
-include 'db_connection.php';
-session_start();
-
-
-if (!isset($_SESSION['username']) || !isset($_SESSION['role'])) {
-    header("Location: Login.php");
-    exit;
-}
-
-if ($_SESSION['role'] !== 'admin') {
-    header("Location: HomePage.php");
-    exit;
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['create'])) {
-        $title = $_POST['title'];
-        $description = $_POST['description'];
-        $image_url = $_POST['image_url'];
-
-        $stmt = $conn->prepare("INSERT INTO recipes (title, description, image_url) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $title, $description, $image_url);
-        $stmt->execute();
-        $stmt->close();
-    } elseif (isset($_POST['update'])) {
-        $id = $_POST['id'];
-        $title = $_POST['title'];
-        $description = $_POST['description'];
-        $image_url = $_POST['image_url'];
-
-        $stmt = $conn->prepare("UPDATE recipes SET title = ?, description = ?, image_url = ? WHERE id = ?");
-        $stmt->bind_param("sssi", $title, $description, $image_url, $id);
-        $stmt->execute();
-        $stmt->close();
-    } elseif (isset($_POST['delete'])) {
-        $id = $_POST['id'];
-
-        $stmt = $conn->prepare("DELETE FROM recipes WHERE id = ?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $stmt->close();
-    }
-}
-
-$result = $conn->query("SELECT * FROM recipes ORDER BY created_at DESC");
-$recipes = $result->fetch_all(MYSQLI_ASSOC);
+require_once 'AdminController.php';
 ?>
 
 <!DOCTYPE html>

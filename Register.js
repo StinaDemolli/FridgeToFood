@@ -1,87 +1,62 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector('form');
-    const BtnSubmit = document.getElementById('submit-btn');
+    const form = document.getElementById("register-form");
 
-    const validate = (ngjarja) => {
-        ngjarja.preventDefault();
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); 
 
-        const fullName = document.getElementById('fullName');
-        const username = document.getElementById('username');
-        const email = document.getElementById('email');
-        const phone = document.getElementById('phone');
-        const password = document.getElementById('password');
-        const confirmPassword = document.getElementById('confirmPassword');
-        const agree = document.getElementById('agree');
+        const fullName = document.getElementById("fullName").value.trim();
+        const username = document.getElementById("username").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+        const agree = document.getElementById("agree");
 
-        if (fullName.value === "") {
-            alert("Please enter your full name.");
-            fullName.focus();
-            return false;
+        const nameRegex = /^[a-zA-Z\s]{3,50}$/;
+        const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const phoneRegex = /^\+?[0-9]{9,15}$/;
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
+        let isValid = true;
+
+        if (!nameRegex.test(fullName)) {
+            alert("Full Name must be between 3-50 characters and contain only letters and spaces.");
+            isValid = false;
         }
 
-        if (username.value === "") {
-            alert("Please enter your username.");
-            username.focus();
-            return false;
+        if (!usernameRegex.test(username)) {
+            alert("Username must be 3-20 characters long and can contain letters, numbers, and underscores.");
+            isValid = false;
         }
 
-        if (email.value === "") {
-            alert("Please enter your email.");
-            email.focus();
-            return false;
+        if (!emailRegex.test(email)) {
+            alert("Invalid email format.");
+            isValid = false;
         }
 
-        if (!emailValid(email.value)) {
-            alert("Please enter a valid email.");
-            email.focus();
-            return false;
+        if (!phoneRegex.test(phone)) {
+            alert("Phone number must be between 9-15 digits, with an optional + at the start.");
+            isValid = false;
         }
 
-        if (phone.value === "") {
-            alert("Please enter your phone number.");
-            phone.focus();
-            return false;
+        if (!passwordRegex.test(password)) {
+            alert("Password must be at least 6 characters long, include at least one letter, one number, and one special character.");
+            isValid = false;
         }
 
-        if (password.value === "") {
-            alert("Please enter your password.");
-            password.focus();
-            return false;
-        }
-
-        if (confirmPassword.value === "") {
-            alert("Please confirm your password.");
-            confirmPassword.focus();
-            return false;
-        }
-
-        if (password.value !== confirmPassword.value) {
-            alert("Password and confirm password do not match.");
-            confirmPassword.focus();
-            return false;
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            isValid = false;
         }
 
         if (!agree.checked) {
             alert("Please accept the terms and conditions.");
-            agree.focus();
-            return false;
+            isValid = false;
         }
 
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
-        if (!passwordRegex.test(password.value)) {
-            alert("Password must contain at least 6 characters, including letters and numbers.");
-            password.focus();
-            return false;
+        if (isValid) {
+            form.submit();
         }
-
-        alert("Form is successfully validated and can be submitted.");
-        return true;
-    };
-
-    const emailValid = (email) => {
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        return emailRegex.test(email.toLowerCase());
-    };
-
-    form.addEventListener('submit', validate);
+    });
 });

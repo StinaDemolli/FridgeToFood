@@ -15,14 +15,14 @@ class Recipe {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function createRecipe($title, $description, $image_url) {
-        $stmt = $this->conn->prepare("INSERT INTO recipes (title, description, image_url) VALUES (?, ?, ?)");
-        return $stmt->execute([$title, $description, $image_url]);
+    public function createRecipe($title, $description, $image_url, $added_by) {
+        $stmt = $this->conn->prepare("INSERT INTO recipes (title, description, image_url, added_by) VALUES (?, ?, ?, ?)");
+        return $stmt->execute([$title, $description, $image_url, $added_by]);
     }
 
-    public function updateRecipe($id, $title, $description, $image_url) {
+    public function updateRecipe($title, $description, $image_url) {
         $stmt = $this->conn->prepare("UPDATE recipes SET title = ?, description = ?, image_url = ? WHERE id = ?");
-        return $stmt->execute([$title, $description, $image_url, $id]);
+        return $stmt->execute([$id, $title, $description, $image_url]);
     }
 
     public function deleteRecipe($id) {

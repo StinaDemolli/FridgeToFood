@@ -56,6 +56,7 @@ require_once 'AdminController.php';
         <input type="text" name="title" placeholder="Title" required>
         <textarea name="description" placeholder="Description" required></textarea>
         <input type="text" name="image_url" placeholder="Image URL" required>
+        <input type="hidden" name="added_by" value="<?php echo $_SESSION['username']; ?>">
         <button type="submit" name="create">Add Recipe</button>
 
     </form>
@@ -72,6 +73,7 @@ require_once 'AdminController.php';
             <input type="text" name="title" value="<?= htmlspecialchars($recipe['title']) ?>" required>
             <textarea name="description" required><?= htmlspecialchars($recipe['description']) ?></textarea>
             <input type="text" name="image_url" value="<?= htmlspecialchars($recipe['image_url']) ?>" required>
+            <input type="text" name="added_by" value="<?php echo htmlspecialchars($recipe['added_by']); ?>" >
             <button type="submit" name="update">Update</button>
             <button type="submit" name="delete" onclick="return confirm('Are you sure?')">Delete</button>
             </div>

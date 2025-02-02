@@ -64,21 +64,23 @@ if (!isset($_SESSION['username'])) {
 
             <div class="New">
                 <div class="RecetatBox">
-                    <img src="Images/shrimptaco.jpg" alt="Receta 3">
+                    <a style="text-decoration: none;" href="recipes.php"><img src="Images/shrimptaco.jpg" alt="Receta 3">
                     <h2>Shrimp Taco</h2>
-                    <p>A shrimp taco recipe combines juicy, seasoned shrimp with fresh toppings for a vibrant, flavorful dish.</p>
+                    <p>A shrimp taco recipe combines juicy, seasoned shrimp with fresh toppings for a vibrant, flavorful dish.</p></a>
                 </div>
 
                 <div class="RecetatBox">
+                <a href="recipes.php" style="text-decoration: none;">
                     <img src="Images/receta3.jpg" alt="Receta 3">
                     <h2>Vegetable Stir Fry</h2>
-                    <p>A quick and healthy stir fry loaded with fresh veggies and soy sauce.</p>
+                    <p>A quick and healthy stir fry loaded with fresh veggies and soy sauce.</p></a>
                 </div>
 
                 <div class="RecetatBox">
+                <a href="recipes.php" style="text-decoration: none;">
                     <img src="Images/receta6.jpg" alt="Receta 3">
                     <h2>Chocolate Cake</h2>
-                    <p>A rich and moist chocolate cake with a silky chocolate frosting.</p>
+                    <p>A rich and moist chocolate cake with a silky chocolate frosting.</p></a>
                 </div>
             </div>
         </div>

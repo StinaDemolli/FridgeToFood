@@ -20,9 +20,9 @@ class Recipe {
         return $stmt->execute([$title, $description, $image_url, $added_by]);
     }
 
-    public function updateRecipe($title, $description, $image_url) {
+    public function updateRecipe($id, $title, $description, $image_url) {
         $stmt = $this->conn->prepare("UPDATE recipes SET title = ?, description = ?, image_url = ? WHERE id = ?");
-        return $stmt->execute([$id, $title, $description, $image_url]);
+        return $stmt->execute([$title, $description, $image_url, $id]);
     }
 
     public function deleteRecipe($id) {
